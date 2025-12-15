@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 
 def home(request):
     return render(request, "blog/home.html")
@@ -21,11 +21,11 @@ def profile(request):
 
 def signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("login")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     return render(request, "registration/signup.html", {"form": form})
