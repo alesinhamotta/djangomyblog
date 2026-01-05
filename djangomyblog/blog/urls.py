@@ -1,15 +1,13 @@
-# djangomyblog\blog\urls.py
-
-from django.urls import include, path
-from .views import about, delete_post, home, new_post, post_detail, signup, profile
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('about/', about),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', signup, name='signup'),
-    path('profile/', profile),
-    path('post/<int:id>/', post_detail, name='post_detail'),
-    path('new/', new_post, name='new_post'),
-    path('delete/<int:id>/', delete_post, name='delete_post'),
+    path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('new/', views.new_post, name='new_post'),
+    path('post/<int:id>/', views.post_detail, name='post_detail'),
+    path('delete/<int:id>/', views.delete_post, name='delete_post'),
+
+    # 👇 
+    path('signup/', views.signup, name='signup'),
 ]

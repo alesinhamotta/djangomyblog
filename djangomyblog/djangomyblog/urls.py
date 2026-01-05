@@ -1,19 +1,12 @@
-# djangomyblog/blog/urls.py
-
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("about/", views.about, name="about"),
-    path("profile/", views.profile, name="profile"),
-    path("signup/", views.signup, name="signup"),
+    path('admin/', admin.site.urls),
 
-    path("new/", views.new_post, name="new_post"),
+    # Autenticação (login, logout, password reset etc.)
+    path('accounts/', include('django.contrib.auth.urls')),
 
-    # Detalhe do post
-    path("post/<int:id>/", views.post_detail, name="post_detail"),
-
-    # Deletar post
-    path("post/<int:id>/delete/", views.delete_post, name="delete_post"),
+    # App blog
+    path('', include('blog.urls')),
 ]

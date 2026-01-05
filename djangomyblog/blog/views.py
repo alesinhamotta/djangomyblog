@@ -1,28 +1,22 @@
-# djangomyblog\blog\views.py
-
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm
-from blog.models import Post
+
+from .forms import CustomUserCreationForm, CommentForm
+from .models import Post, Comment
 
 
 def home(request):
-
     posts = (
         Post.objects
         .filter(status='ON')
         .select_related('user')
         .order_by('-created_at')
     )
-
     return render(request, "blog/home.html", {"posts": posts})
 
 
 def about(request):
     return render(request, "blog/about.html")
-
-# Só acessa profile() se estiver logado
-# Não está logado, vai para '/accounts/login/'
 
 
 @login_required
@@ -45,25 +39,23 @@ def signup(request):
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id, status='ON')
 
-    # Lista apenas comentários ON do post
-    comments = Comment.objects.filter(
-        post=post,
-        status='ON'
-    ).select_related('user').order_by('-created_at')
+    comments = (
+        Comment.objects
+        .filter(post=post, status='ON')
+        .select_related('user')
+        .order_by('-created_at')
+    )
 
-    # Formulário inicial
     form = CommentForm()
 
-    # Se o usuário enviou um comentário
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                new_comment = form.save(commit=False)
-                new_comment.user = request.user
-                new_comment.post = post
-                new_comment.save()
-                return redirect('post_detail', id=post.id)
+    if request.method == "POST" and request.user.is_authenticated:
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+            return redirect("post_detail", id=post.id)
 
     return render(
         request,
@@ -71,17 +63,16 @@ def post_detail(request, id):
         {
             "post": post,
             "comments": comments,
-            "form": form
+            "form": form,
         }
     )
 
 
 @login_required
 def new_post(request):
-
     if request.method == "POST":
-        title = request.POST.get("title")
-        content = request.POST.get("content")
+        title = request.POST.get("title", "").strip()
+        content = request.POST.get("content", "").strip()
 
         if title and content:
             Post.objects.create(
@@ -94,18 +85,15 @@ def new_post(request):
 
     return render(request, "blog/new_post.html")
 
+
 @login_required
 def delete_post(request, id):
-    post = get_object_or_404(
-        Post,
-        id=id,
-        status='ON'
-    )
+    post = get_object_or_404(Post, id=id, status='ON')
 
     if post.user != request.user:
-        return redirect('home')
+        return redirect("home")
 
     post.status = 'DEL'
     post.save(update_fields=['status'])
 
-    return redirect('home')
+    return redirect("home")

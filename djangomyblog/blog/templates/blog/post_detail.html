@@ -39,7 +39,8 @@
 {% for comment in comments %}
   <div style="margin-bottom: 15px;">
     <strong>{{ comment.user.username }}</strong>
-    <small> • {{ comment.created_at }}</small>
+    <small> • {{ comment.created_at|date:"d/m/Y H:i" }}</small>
+
     <p>{{ comment.comment }}</p>
   </div>
 
