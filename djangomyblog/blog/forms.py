@@ -1,12 +1,19 @@
 # djangomyblog/blog/forms.py
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django import forms
+from .models import Comment
+
 
 class CustomUserCreationForm(UserCreationForm):
-    # O meta interior da classe UserCreationForm já define os campos básicos.
-    # Nós só precisamos dizer ao nosso formulário para incluir o 'email'.
     class Meta(UserCreationForm.Meta):
-        # Campos que queremos no formulário
-        fields = UserCreationForm.Meta.fields + ('email',) 
-        # O UserCreationForm.Meta.fields é ('username',)
-        # Então, fields será ('username', 'email')
+        fields = UserCreationForm.Meta.fields + ('email',)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']
+        widgets = {
+            'comment': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Escreva seu comentário aqui...'})
+        }

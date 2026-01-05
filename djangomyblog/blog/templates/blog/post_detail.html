@@ -17,4 +17,35 @@
 </p>
 <hr>
 <p>{{ post.content }}</p>
+<hr>
+
+{% if user.is_authenticated %}
+  <h3>Deixe seu comentário</h3>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+  </form>
+
+{% else %}
+  <p>⚠️ Faça login para comentar.</p>
+{% endif %}
+
+<hr>
+
+<h3>Comentários</h3>
+
+{% for comment in comments %}
+  <div style="margin-bottom: 15px;">
+    <strong>{{ comment.user.username }}</strong>
+    <small> • {{ comment.created_at }}</small>
+    <p>{{ comment.comment }}</p>
+  </div>
+
+{% empty %}
+  <p>Não há comentários ainda.</p>
+{% endfor %}
+
+
 {% endblock %}

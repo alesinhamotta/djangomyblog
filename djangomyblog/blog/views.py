@@ -44,7 +44,37 @@ def signup(request):
 
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id, status='ON')
-    return render(request, 'blog/post_detail.html', {'post': post})
+
+    # Lista apenas comentários ON do post
+    comments = Comment.objects.filter(
+        post=post,
+        status='ON'
+    ).select_related('user').order_by('-created_at')
+
+    # Formulário inicial
+    form = CommentForm()
+
+    # Se o usuário enviou um comentário
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                new_comment = form.save(commit=False)
+                new_comment.user = request.user
+                new_comment.post = post
+                new_comment.save()
+                return redirect('post_detail', id=post.id)
+
+    return render(
+        request,
+        "blog/post_detail.html",
+        {
+            "post": post,
+            "comments": comments,
+            "form": form
+        }
+    )
+
 
 @login_required
 def new_post(request):
