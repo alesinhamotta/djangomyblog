@@ -81,7 +81,33 @@
     color: #94a3b8;
 }
 
-.form-container a {
-    color: #22d3ee;
-    text-decoration: none;
-    font-weight:
+.form-container a:hover {
+    color: #38f9ff;
+    text-decoration: underline;
+}
+
+
+
+.form-container {
+    background: rgba(5, 10, 30, 0.9);
+    border-radius: 18px;
+    padding: 30px;
+    width: 380px;
+    margin: 80px auto;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+}
+
+/* Fundo da página de formulários (login, novo post, comentário) */
+body {
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.30),
+            rgba(0, 0, 0, 0.30)
+        ),
+        url("../img/blogfuturo.png") no-repeat center 50% fixed;
+
+    background-size: cover;
+}
+
+

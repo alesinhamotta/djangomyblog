@@ -18,18 +18,18 @@ body {
 
 /* Fundo da página */
 body {
-    background-image: linear-gradient(rgb(0, 177, 193), rgb(0, 64, 70));
+    background-image: linear-gradient(rgb(50, 56, 56), rgb(0, 64, 70));
 }
 
 /* Comportamento dos links */
 a {
-    color: steelblue;
+    color: rgb(188, 197, 204);
     text-decoration: none;
 }
 
 /* Comportamento dos links com o ponteiro sobre eles */
 a:hover {
-    color: orangered;
+    color: rgb(221, 151, 125);
 }
 
 /* Centraliza, limita e organiza o layout */
@@ -45,7 +45,7 @@ a:hover {
 
 /* Cabeçalho */
 header {
-    background-color: black;
+    background-color: rgb(27, 27, 27);
     color: white;
     padding: .5rem;
 }
@@ -59,7 +59,7 @@ header h1 {
 header nav {
     margin-top: .5rem;
     padding-top: .5rem;
-    border-top: 1px dotted grey;
+    border-top: 1px dotted rgb(87, 81, 81);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +76,7 @@ header nav a {
 
 /* Comportamento dos links do menu com o ponteiro do mouse sobre */
 header nav a:hover {
-    color: orange;
+    color: rgb(64, 124, 236);
     background-color: rgba(255, 255, 255, .35);
 }
 
@@ -94,8 +94,8 @@ header > div span {
 main {
     position: relative;
     flex-grow: 1;
-    padding: 1rem 1.5rem;
-    background-color: white;
+    padding: 4rem 1.5rem;
+    background: transparent; /* REMOVE O FUNDO */
 }
 
 /* Rodapé */
@@ -124,4 +124,34 @@ footer {
 .btn-logout button:hover {
     color: orange;
     background-color: rgba(255, 255, 255, .35);
+}
+
+/* Texto geral em branco */
+main,
+main p,
+main h1,
+main h2,
+main h3,
+main h4,
+main a {
+    color: #ffffff;
+}
+
+.post,
+.post p,
+.post small {
+    color: #e5e7eb; /* branco suave */
+}
+
+main a {
+    color: #38bdf8; /* azul claro */
+}
+
+main a:hover {
+    color: #7dd3fc;
+}
+
+.comments,
+.comments p {
+    color: #f8fafc;
 }
