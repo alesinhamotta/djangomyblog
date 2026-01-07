@@ -1,14 +1,26 @@
-{# templates/registration/signup.html #}
-
 {% extends "blog/_base.html" %}
 
 {% block content %}
-<h2>Criar conta</h2>
+<div class="form-container">
+    <h2>Criar conta</h2>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-error">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Cadastrar</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
 
+    <div class="form-links">
+        <p>Já tem conta?
+            <a href="{% url 'login' %}">Faça login</a>
+        </p>
+    </div>
+</div>
 {% endblock %}

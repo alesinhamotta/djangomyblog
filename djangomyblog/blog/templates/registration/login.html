@@ -1,16 +1,24 @@
-{# djangomyblog\blog\templates\registration\login.html #}
-
 {% extends "blog/_base.html" %}
 
 {% block content %}
-<h2>Login</h2>
+<div class="form-container">
+    <h2>Login</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Entrar</button>
+    </form>
 
-<p>Não é cadastrado? <a href="{% url 'signup' %}">Clique aqui</a>!</p>
-<p>Esqueceu a senha? <a href="/accounts/password_reset">Clique aqui</a>!</p>
+    <div class="form-links">
+        <p>
+            Não é cadastrado?
+            <a href="{% url 'signup' %}">Crie sua conta</a>
+        </p>
+
+        <p>
+            <a href="/accounts/password_reset/">Esqueceu a senha?</a>
+        </p>
+    </div>
+</div>
 {% endblock %}

@@ -20,17 +20,23 @@
 <hr>
 
 {% if user.is_authenticated %}
-  <h3>Deixe seu comentário</h3>
+<div class="form-container">
+    <h3>Deixe um comentário</h3>
 
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-  </form>
-
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar comentário</button>
+    </form>
+</div>
 {% else %}
-  <p>⚠️ Faça login para comentar.</p>
+<div class="form-container">
+    <small>
+        Para comentar, faça <a href="{% url 'login' %}">login</a>.
+    </small>
+</div>
 {% endif %}
+
 
 <hr>
 

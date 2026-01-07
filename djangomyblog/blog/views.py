@@ -1,8 +1,9 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
-from .forms import CustomUserCreationForm, CommentForm
 from .models import Post, Comment
+from .forms import CommentForm, CustomUserCreationForm
 
 
 def home(request):
@@ -27,9 +28,17 @@ def profile(request):
 def signup(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
+
         if form.is_valid():
-            form.save()
-            return redirect("login")
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+        else:
+            messages.error(
+                request,
+                "Este nome de usuário já existe. Escolha outro."
+            )
+
     else:
         form = CustomUserCreationForm()
 

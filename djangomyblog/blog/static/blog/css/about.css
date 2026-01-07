@@ -1,0 +1,31 @@
+.about {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about h1 {
+    margin-bottom: 20px;
+}
+
+.about-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+.about-content h2 {
+    margin-bottom: 15px;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.about-content ul {
+    margin: 15px 0 20px 20px;
+}
+
+.about-content li {
+    margin-bottom: 8px;
+}
