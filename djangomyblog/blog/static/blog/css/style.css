@@ -16,10 +16,7 @@ body {
     height: 100%;
 }
 
-/* Fundo da página */
-body {
-    background-image: linear-gradient(rgb(50, 56, 56), rgb(0, 64, 70));
-}
+
 
 /* Comportamento dos links */
 a {
@@ -47,7 +44,7 @@ a:hover {
 header {
     background-color: rgb(27, 27, 27);
     color: white;
-    padding: .5rem;
+    padding: .1rem;
 }
 
 /* Título no cabeçalho */
@@ -92,9 +89,9 @@ header > div span {
 
 /* Conteúdo principal */
 main {
-    position: relative;
-    flex-grow: 1;
-    padding: 4rem 1.5rem;
+    max-width: 1000px;      /* controla largura do texto */
+    margin: 0 auto;         /* centraliza */
+    padding: 2rem;          /* espaço interno */
     background: transparent; /* REMOVE O FUNDO */
 }
 
@@ -154,4 +151,49 @@ main a:hover {
 .comments,
 .comments p {
     color: #f8fafc;
+}
+/* ================= HOME COM VÍDEO ================= */
+
+/* Wrapper geral da home */
+.home-video-wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Vídeo de fundo */
+.home-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
+}
+
+/* Conteúdo por cima do vídeo */
+.home-content {
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+    color: #ffffff;
+}
+
+/* Texto da introdução */
+.intro-text {
+    margin-bottom: 3rem;
+}
+
+.intro-text h2 {
+    color: #4fd1ff;
+}
+
+.call-to-action {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: #9ae6ff;
 }

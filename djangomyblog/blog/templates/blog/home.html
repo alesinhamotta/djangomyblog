@@ -1,24 +1,63 @@
-{# djangomyblog\blog\templates\blog\home.html #}
-
 {% extends "blog/_base.html" %}
+{% load static %}
 
 {% block title %}Início{% endblock %}
 
 {% block content %}
 
-<h2>Posts Recentes</h2>
-<p><small>Ordenados pela data mais recente.</small></p>
+<div class="home-video-wrapper">
 
-{% for post in posts %}
-<hr>
-<article>
-    <h3><a href="/post/{{ post.id }}">{{ post.title }}</a></h3>
-    <p>{{ post.content|truncatechars:80 }}</p>
-    <small>
-        Por {{ post.user.username }}
-        em {{ post.created_at|date:"d/m/Y à\s H:i" }}
-    </small>
-</article>
-{% endfor %}
+    <!-- VÍDEO DE FUNDO -->
+    <video autoplay muted loop playsinline class="home-video">
+        <source src="{% static 'blog/video/fundo-tech.mp4' %}" type="video/mp4">
+        Seu navegador não suporta vídeo.
+    </video>
+
+    <!-- CONTEÚDO DA HOME -->
+    <div class="home-content">
+
+        <section class="intro-text">
+            <h2>A Era da Tecnologia e da Inteligência Artificial</h2>
+
+            <p>
+                Vivemos uma nova era marcada pela evolução acelerada da tecnologia e pela presença
+                cada vez maior da Inteligência Artificial no nosso dia a dia.
+            </p>
+
+            <p>
+                A <strong>IA Generativa</strong> é utilizada para criação de textos,
+                imagens, códigos, músicas e soluções inteligentes.
+                Outras formas de IA atuam na automação de processos,
+                análise de dados, segurança digital e tomada de decisões.
+            </p>
+
+            <p>
+                A tecnologia não apenas transforma profissões,
+                mas também a forma como aprendemos, trabalhamos e nos comunicamos.
+            </p>
+
+            <p class="call-to-action">
+                💬 <strong>O que você acha desse avanço?</strong><br>
+                Deixe seu comentário e vamos debater esse assunto!
+            </p>
+        </section>
+
+        <h2>Posts Recentes</h2>
+        <p><small>Ordenados pela data mais recente.</small></p>
+
+        {% for post in posts %}
+        <hr>
+        <article>
+            <h3><a href="/post/{{ post.id }}">{{ post.title }}</a></h3>
+            <p>{{ post.content|truncatechars:80 }}</p>
+            <small>
+                Por {{ post.user.username }}
+                em {{ post.created_at|date:"d/m/Y à\\s H:i" }}
+            </small>
+        </article>
+        {% endfor %}
+
+    </div>
+</div>
 
 {% endblock %}
